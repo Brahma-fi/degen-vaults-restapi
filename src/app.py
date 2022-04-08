@@ -1,6 +1,6 @@
 from flask_cors import CORS
 from flask import Flask, jsonify
-from queries import get_historic_rewards_data
+from src.queries import get_historic_rewards_data
 
 app = Flask(__name__)
 CORS(app)
@@ -11,4 +11,4 @@ def get_historic_rewards():
     return  (jsonify(data = result), 200, {"ContentType": 'application/json'})
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0", port=8080)
