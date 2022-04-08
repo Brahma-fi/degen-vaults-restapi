@@ -1,6 +1,5 @@
 import os
 import boto3
-import mysql.connector as mysql
 from dotenv import load_dotenv
 
 load_dotenv()
