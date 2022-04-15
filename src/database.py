@@ -6,6 +6,7 @@ load_dotenv()
 
 DATABASE_NAME = 'protected_moonshots_activity'
 HISTORIC_REWARDS_TABLE_NAME = 'historic_rewards'
+OPEN_POSITION_TABLE_NAME = 'open_positions'
 
 rds_client = boto3.client(
     'rds-data', 
