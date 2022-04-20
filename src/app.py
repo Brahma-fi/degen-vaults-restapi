@@ -1,6 +1,6 @@
 from flask_cors import CORS
 from flask import Flask, jsonify
-from src.queries import get_historic_rewards_data, get_open_positions_data, get_share_price_data
+from src.queries import get_historic_rewards_data, get_open_positions_data, get_share_price_data, get_apr_data
 
 app = Flask(__name__)
 CORS(app)
@@ -25,6 +25,12 @@ def get_open_positions():
 def get_share_prices():
     result = get_share_price_data()
     return  (jsonify(data = result), 200, {"ContentType": 'application/json'})
+
+@app.route("/apr", methods=['GET'])
+def get_apr_values():
+    result = get_apr_data()
+    return  (jsonify(data = result), 200, {"ContentType": 'application/json'})
+
 
 
 if __name__ == '__main__':
