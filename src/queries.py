@@ -22,9 +22,8 @@ def get_share_price_data():
     query = f'''select * from {DATABASE_NAME}.{SHARE_TABLE_NAME};'''
     response = execute_statement(query, [])
     result = response['records']
-    timestamp = [ row[0]['stringValue'] for row in result]
-    price = [ row[1]['doubleValue'] for row in result]
-    return {'timestamp': timestamp, 'price': price}  
+    out = [ {'timestamp': row[0]['stringValue'], 'price': row[1]['doubleValue']} for row in result]
+    return out
 
 def get_apr_data():
     query = f'''select * from {DATABASE_NAME}.{SHARE_TABLE_NAME};'''
