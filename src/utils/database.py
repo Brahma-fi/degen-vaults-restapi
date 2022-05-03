@@ -23,12 +23,21 @@ def execute_statement(query, params):
         parameters = params) 
     return response
 
+def get_timestamp_value_result(timestamp, value, key_name):
+    result = {}
+    result[RESPONSE_KEYS.timestamp] = timestamp
+    result[key_name] = value
+
+    return result
+
 def timestamp_key_row_formatter(row, key_name):
     timestamp = row[0]['stringValue']
     value = row[1]['doubleValue']
 
-    response = {}
-    response[RESPONSE_KEYS.timestamp] = timestamp
-    response[key_name] = value
+    return get_timestamp_value_result(timestamp, value, key_name)
 
-    return response
+def formatted_latest_timestamp_value_entry(rows, key_name):
+    timestamp = rows[-1][0]['stringValue']
+    value = rows[-1][-1]['doubleValue']
+
+    return get_timestamp_value_result(timestamp, value, key_name)

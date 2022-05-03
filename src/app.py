@@ -17,7 +17,7 @@ def get_historic_rewards():
 @app.route("/latest_buffer", methods=['GET'])
 def get_latest_buffer():
     result = get_latest_buffer_value()
-    return  (jsonify(data = result[-1] if len(result) > 0 else {}), 200, {"ContentType": 'application/json'})
+    return  (jsonify(data = result), 200, {"ContentType": 'application/json'})
 
 @app.route("/open_timestamps", methods=['GET'])
 def get_open_positions():
