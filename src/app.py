@@ -1,7 +1,6 @@
 from flask_cors import CORS
 from flask import Flask, jsonify
-from queries import get_apr_data, get_open_positions_data, get_share_price_data
-from utils.queries import get_historic_rewards_data, get_latest_buffer_value
+from utils.queries import get_apr_data, get_open_positions_data, get_share_price_data, get_historic_rewards_data, get_latest_buffer_value
 
 app = Flask(__name__)
 CORS(app)
