@@ -3,6 +3,7 @@ import boto3
 from dotenv import load_dotenv
 
 from configs.database import DATABASE_NAME
+from configs.response import RESPONSE_KEYS
 
 load_dotenv()
 
@@ -23,14 +24,8 @@ def execute_statement(query, params):
         parameters = params) 
     return response
 
-def historic_rewards_row_formatter(row):
+def timestamp_key_row_formatter(row, key_name):
     timestamp = row[0]['stringValue']
-    claimed_rewards = row[1]['doubleValue']
+    value = row[1]['doubleValue']
 
-    return {'timestamp': timestamp, 'claimed_rewards': claimed_rewards}
-
-def buffer_values_row_formatter(row):
-   timestamp = row[0]['stringValue']
-   buffer_value = row[1]['doubleValue']
-
-   return {'timestamp': timestamp, 'buffer': buffer_value}
+    return {[RESPONSE_KEYS.timestamp]: timestamp, [key_name]: value}
