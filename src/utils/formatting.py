@@ -1,3 +1,4 @@
+from flask import jsonify
 from configs.response import RESPONSE_KEYS
 
 class Formattor():
@@ -25,3 +26,6 @@ class Formattor():
         value = rows[-1][-1]['doubleValue']
 
         return self.__get_timestamp_value_result(timestamp, value, key_name)
+
+    def formatted_response(self, result):
+        return (jsonify(data = result), 200, {"ContentType": 'application/json'})
