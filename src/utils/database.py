@@ -3,7 +3,6 @@ import boto3
 from dotenv import load_dotenv
 
 from configs.database import DATABASE_NAME
-from configs.response import RESPONSE_KEYS
 
 load_dotenv()
 
@@ -22,22 +21,3 @@ def execute_statement(query, params):
         sql = query,
         parameters = params) 
     return response
-
-def get_timestamp_value_result(timestamp, value, key_name):
-    result = {}
-    result[RESPONSE_KEYS.timestamp] = timestamp
-    result[key_name] = value
-
-    return result
-
-def timestamp_key_row_formatter(row, key_name):
-    timestamp = row[0]['stringValue']
-    value = row[1]['doubleValue']
-
-    return get_timestamp_value_result(timestamp, value, key_name)
-
-def formatted_latest_timestamp_value_entry(rows, key_name):
-    timestamp = rows[-1][0]['stringValue']
-    value = rows[-1][-1]['doubleValue']
-
-    return get_timestamp_value_result(timestamp, value, key_name)
