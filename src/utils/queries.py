@@ -1,7 +1,6 @@
 from configs.database import DATABASE_NAME, TABLE_NAMES
 from configs.response import RESPONSE_KEYS
-from database import execute_statement
-from utils.database import timestamp_key_row_formatter
+from utils.database import timestamp_key_row_formatter,execute_statement
 
 def get_historic_rewards_data():
     query = f'''select * from {DATABASE_NAME}.{TABLE_NAMES.historic_rewards};'''

@@ -28,4 +28,8 @@ def timestamp_key_row_formatter(row, key_name):
     timestamp = row[0]['stringValue']
     value = row[1]['doubleValue']
 
-    return {[RESPONSE_KEYS.timestamp]: timestamp, [key_name]: value}
+    response = {}
+    response[RESPONSE_KEYS.timestamp] = timestamp
+    response[key_name] = value
+
+    return response
