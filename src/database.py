@@ -6,6 +6,7 @@ load_dotenv()
 
 DATABASE_NAME = 'protected_moonshots_activity'
 HISTORIC_REWARDS_TABLE_NAME = 'historic_rewards'
+BUFFER_VALUES_TABLE_NAME = 'buffer_values'
 
 rds_client = boto3.client(
     'rds-data', 
@@ -24,8 +25,14 @@ def execute_statement(query, params):
         parameters = params) 
     return response
 
-def row_formatter(row):
+def historic_rewards_row_formatter(row):
     timestamp = row[0]['stringValue']
     claimed_rewards = row[1]['doubleValue']
 
     return {'timestamp': timestamp, 'claimed_rewards': claimed_rewards}
+
+def buffer_values_row_formatter(row):
+   timestamp = row[0]['stringValue']
+   buffer_value = row[1]['doubleValue']
+
+   return {'timestamp': timestamp, 'buffer': buffer_value}
