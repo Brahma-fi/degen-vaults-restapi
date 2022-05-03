@@ -2,11 +2,9 @@ import os
 import boto3
 from dotenv import load_dotenv
 
-load_dotenv()
+from configs.database import DATABASE_NAME
 
-DATABASE_NAME = 'protected_moonshots_activity'
-HISTORIC_REWARDS_TABLE_NAME = 'historic_rewards'
-BUFFER_VALUES_TABLE_NAME = 'buffer_values'
+load_dotenv()
 
 rds_client = boto3.client(
     'rds-data', 
