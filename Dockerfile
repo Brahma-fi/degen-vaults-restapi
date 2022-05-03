@@ -12,4 +12,6 @@ RUN apt-get update
 
 RUN apt-get install -y gunicorn
 
+RUN export PYTHONPATH="${PYTHONPATH}:./src"
+
 CMD ["gunicorn","-w 4", "-b 0.0.0.0:5000", "src.app:app" ]

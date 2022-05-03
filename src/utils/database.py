@@ -2,7 +2,7 @@ import os
 import boto3
 from dotenv import load_dotenv
 
-from configs.database import DATABASE_NAME
+from ..configs.database import DATABASE_NAME
 
 class Database():
     def __init__(self):

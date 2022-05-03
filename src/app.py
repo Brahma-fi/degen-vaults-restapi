@@ -1,9 +1,9 @@
 from flask_cors import CORS
-from flask import Flask, jsonify
-from configs.database import TABLE_NAMES
-from configs.response import RESPONSE_KEYS
-from utils.formatting import Formattor
-from utils.queries import Queries
+from flask import Flask
+from .configs.database import TABLE_NAMES
+from .configs.response import RESPONSE_KEYS
+from .utils.formatting import Formattor
+from .utils.queries import Queries
 
 app = Flask(__name__)
 CORS(app)
@@ -22,7 +22,7 @@ def get_historic_rewards():
 
 @app.route("/latest_buffer", methods=['GET'])
 def get_latest_buffer():
-    result = Queries().get_all_timestamp_value_data(TABLE_NAMES.buffer_values, RESPONSE_KEYS.buffer)
+    result = Queries().get_latest_timestamp_value_data(TABLE_NAMES.buffer_values, RESPONSE_KEYS.buffer)
     return  Formattor().formatted_response(result)
 
 @app.route("/open_timestamps", methods=['GET'])

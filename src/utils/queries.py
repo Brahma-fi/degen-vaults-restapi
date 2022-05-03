@@ -1,6 +1,6 @@
-from configs.database import DATABASE_NAME, TABLE_NAMES
-from utils.database import InstantiatedDB
-from utils.formatting import Formattor
+from ..configs.database import DATABASE_NAME, TABLE_NAMES
+from ..utils.database import InstantiatedDB
+from ..utils.formatting import Formattor
 
 class Queries():
     def __query_all_data(self, table_name):
