@@ -27,5 +27,5 @@ class Formattor():
 
         return self.__get_timestamp_value_result(timestamp, value, key_name)
 
-    def formatted_response(self, result):
-        return (jsonify(data = result), 200, {"ContentType": 'application/json'})
+    def formatted_response(self, status_code, result):
+        return (jsonify(data = result), status_code, {"ContentType": 'application/json'})
