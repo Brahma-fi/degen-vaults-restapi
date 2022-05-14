@@ -32,8 +32,7 @@ class OnChainQueries():
                 TABLE_NAMES.ethmaxi_share_price_db, 
                 RESPONSE_KEYS.price
             ))[-1]['price']
-            print(type(vault_total_supply), type(vault_share_price))
-            vault_tvl = vault_total_supply * vault_share_price
+            vault_tvl = round((vault_total_supply * vault_share_price) / vault_info.decimals, 2)
 
             if vault_info.name in balances:
                 balances[vault_info.name] += vault_tvl
