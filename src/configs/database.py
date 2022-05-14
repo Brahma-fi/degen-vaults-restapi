@@ -16,8 +16,9 @@ class Vaults():
                 return True
         return False
 
-    def get_vaults(self) -> list[str]:
+    def get_vaults(self):
         return [field.name for field in fields(self.__class__)]
+        
 @dataclass
 class TableNames():
     historic_rewards: str

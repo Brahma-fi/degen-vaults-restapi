@@ -1,5 +1,7 @@
 from flask_cors import CORS
 from flask import Flask
+
+from .utils.on_chain import OnChainQueries
 from .configs.database import TABLE_NAMES, VAULTS
 from .configs.response import RESPONSE_KEYS
 from .utils.formatting import Formattor
@@ -59,6 +61,11 @@ def get_apr_values(vault_name):
         RESPONSE_KEYS.apr
     )
     return  Formattor().formatted_response(200, result)
+
+@app.route("/tvl", methods=['GET'])
+def get_tvl():
+    result = OnChainQueries().get_tvl()
+    return Formattor().formatted_response(200, result)
 
 
 if __name__ == '__main__':

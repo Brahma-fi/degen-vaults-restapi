@@ -1,11 +1,11 @@
+import json
 import os
 
-from itsdangerous import json
 from web3 import Web3
 
-from configs.database import TABLE_NAMES, VAULTS, VaultInfo
-from configs.response import RESPONSE_KEYS
-from utils.queries import Queries
+from ..configs.database import TABLE_NAMES, VAULTS, VaultInfo
+from ..configs.response import RESPONSE_KEYS
+from ..utils.queries import Queries
 
 class OnChainQueries():
     def __init__(self) -> None:
@@ -25,13 +25,14 @@ class OnChainQueries():
                 abi = self.vault_abi
             )
 
-            vault_total_supply = vault.functions.totalSupply()
+            vault_total_supply = vault.functions.totalSupply().call()
             vault_share_price = (Queries().get_all_timestamp_value_data(
                 TABLE_NAMES.share_price_db 
                 if vault_name == VAULTS.pmusdc.name else 
                 TABLE_NAMES.ethmaxi_share_price_db, 
                 RESPONSE_KEYS.price
-            ))['data'][-1]
+            ))[-1]['price']
+            print(type(vault_total_supply), type(vault_share_price))
             vault_tvl = vault_total_supply * vault_share_price
 
             if vault_info.name in balances:
