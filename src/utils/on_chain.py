@@ -44,10 +44,10 @@ class OnChainQueries():
                 ((vault_total_supply * vault_share_price) + vault_pending_deposits) / vault_info.decimals, 2
             )
 
-            if vault_info.name in balances:
-                balances[vault_info.name] += vault_tvl
+            if vault_info.token in balances:
+                balances[vault_info.token] += vault_tvl
             else:
-                balances[vault_info.name] = vault_tvl
+                balances[vault_info.token] = vault_tvl
 
         return balances
 
