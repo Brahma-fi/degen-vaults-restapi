@@ -38,7 +38,9 @@ def get_share_prices(vault_name):
         })
 
     result = Queries().get_all_timestamp_value_data(
-        TABLE_NAMES.share_price_db if vault_name == VAULTS.pmusdc else TABLE_NAMES.ethmaxi_share_price_db, 
+        TABLE_NAMES.share_price_db 
+        if vault_name == VAULTS.pmusdc.name else 
+        TABLE_NAMES.ethmaxi_share_price_db, 
         RESPONSE_KEYS.price
     )
     return  Formattor().formatted_response(200, result)
@@ -51,7 +53,10 @@ def get_apr_values(vault_name):
         })
 
     result = Queries().get_latest_timestamp_value_data(
-        TABLE_NAMES.share_price_db if vault_name == VAULTS.pmusdc else TABLE_NAMES.ethmaxi_share_price_db, RESPONSE_KEYS.apr
+        TABLE_NAMES.share_price_db 
+        if vault_name == VAULTS.pmusdc.name else 
+        TABLE_NAMES.ethmaxi_share_price_db, 
+        RESPONSE_KEYS.apr
     )
     return  Formattor().formatted_response(200, result)
 
