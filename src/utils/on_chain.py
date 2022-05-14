@@ -41,7 +41,7 @@ class OnChainQueries():
                 RESPONSE_KEYS.price
             ))[-1]['price']
             vault_tvl = round(
-                ((vault_total_supply * vault_share_price) + vault_pending_deposits) / vault_info.decimals, 2
+                ((vault_total_supply * vault_share_price) + vault_pending_deposits), 2
             )
 
             if vault_info.token in balances:
