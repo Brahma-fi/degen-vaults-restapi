@@ -8,7 +8,7 @@ build:
 		docker buildx build --platform=linux/amd64 -t $(image) .
 
 login:
-		aws ecr get-login-password --region $(region) | docker login --username AWS --password-stdin ${AWS_URL}
+		aws ecr get-login-password --region $(region) | docker login --username AWS --password-stdin $(url)
 
 push: 
 		docker tag $(image):$(tag) $(url)/$(image):$(tag)
