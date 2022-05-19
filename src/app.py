@@ -2,7 +2,7 @@ from flask_cors import CORS
 from flask import Flask
 
 from .utils.on_chain import OnChainQueries
-from .configs.database import TABLE_NAMES, VAULTS
+from .configs.database import MONITORED_TOKENS, TABLE_NAMES, VAULTS
 from .configs.response import RESPONSE_KEYS
 from .utils.formatting import Formattor
 from .utils.queries import Queries
@@ -59,6 +59,18 @@ def get_apr_values(vault_name):
         if vault_name == VAULTS.pmusdc.name else 
         TABLE_NAMES.ethmaxi_share_price_db, 
         RESPONSE_KEYS.apr
+    )
+    return  Formattor().formatted_response(200, result)
+
+@app.route("/<token_name>/slippage", methods=['GET'])
+def get_slippage(token_name):
+    if not(MONITORED_TOKENS.is_valid_token(token_name=token_name)):
+        return Formattor().formatted_response(400,{
+            'error': f"{token_name} :: is not a valid vault name"
+        })
+
+    result = Queries().get_withdraw_slippage(
+        MONITORED_TOKENS.frax if token_name == MONITORED_TOKENS.frax.name else MONITORED_TOKENS.steth
     )
     return  Formattor().formatted_response(200, result)
 

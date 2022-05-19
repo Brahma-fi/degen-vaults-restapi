@@ -1,5 +1,5 @@
-from configs.response import RESPONSE_KEYS
-from ..configs.database import DATABASE_NAME, MONITORED_TOKENS, TABLE_NAMES, MonitoredTokenInfo
+from ..configs.response import RESPONSE_KEYS
+from ..configs.database import DATABASE_NAME, TABLE_NAMES, MonitoredTokenInfo
 from ..utils.database import InstantiatedDB
 from ..utils.formatting import Formattor
 
@@ -28,7 +28,7 @@ class Queries():
 
         return out
 
-    def get_withdraw_slippage(token: MonitoredTokenInfo):
+    def get_withdraw_slippage(self, token: MonitoredTokenInfo):
         query = f'''select slippage from {DATABASE_NAME}.{token.table}'''
         response = InstantiatedDB.execute_statement(query, [])
         data = response['records']
