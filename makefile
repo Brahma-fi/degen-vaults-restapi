@@ -1,3 +1,4 @@
+include .env
 image=${PM_API_IMAGE_NAME}
 tag=latest
 url=${AWS_URL}
