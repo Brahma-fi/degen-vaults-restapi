@@ -11,6 +11,7 @@ This is the backend for getting various data related to Brahma's Degen Vaults.
 - /open_timestamps
 - /:vault_name/share_price
 - /:vault_name/apr
+- /:token_name/slippage
 - /tvl
 
 ## Setup
