@@ -9,6 +9,11 @@ class VaultInfo():
     decimals: int
 
 @dataclass
+class MonitoredTokenInfo():
+    name: str
+    table: str
+
+@dataclass
 class Vaults():
     ethmaxi: VaultInfo
     pmusdc: VaultInfo
@@ -23,14 +28,40 @@ class Vaults():
         return [field.name for field in fields(self.__class__)]
 
 @dataclass
+class MonitoredTokens():
+    frax: str
+    steth: str
+
+    def is_valid_token(self, token_name) -> bool:
+        for field in fields(self.__class__):
+            if field.name == token_name:
+                return True
+        return False
+
+    def get_tokens(self):
+        return [field.name for field in fields(self.__class__)]
+
+@dataclass
 class TableNames():
     historic_rewards: str
     buffer_values: str
     open_positions: str
     share_price_db: str 
     ethmaxi_share_price_db: str
+    steth_monitor: str
+    frax_monitor: str
 
 DATABASE_NAME = 'protected_moonshots_activity'
+TABLE_NAMES = TableNames(
+    'historic_rewards',
+    'buffer_values',
+    'open_positions',
+    'share_price_db',
+    'ethmaxi_share_price_db',
+    'steth_monitor',
+    'frax_monitor'
+)
+
 VAULTS = Vaults(
     VaultInfo(
         'ethmaxi',
@@ -47,10 +78,13 @@ VAULTS = Vaults(
         1e6
     )
 )
-TABLE_NAMES = TableNames(
-    'historic_rewards',
-    'buffer_values',
-    'open_positions',
-    'share_price_db',
-    'ethmaxi_share_price_db'
+MONITORED_TOKENS = MonitoredTokens(
+    MonitoredTokenInfo(
+        'frax',
+        TABLE_NAMES.frax_monitor
+    ),
+    MonitoredTokenInfo(
+        'steth',
+        TABLE_NAMES.steth_monitor
+    )
 )
