@@ -27,6 +27,11 @@ def get_latest_buffer():
     result = Queries().get_latest_timestamp_value_data(TABLE_NAMES.buffer_values, RESPONSE_KEYS.buffer)
     return  Formattor().formatted_response(200, result)
 
+@app.route("/all_buffers", methods=['GET'])
+def get_all_buffers():
+    result = Queries().get_all_timestamp_value_data(TABLE_NAMES.buffer_values, RESPONSE_KEYS.buffer)
+    return  Formattor().formatted_response(200, result)
+
 @app.route("/open_timestamps", methods=['GET'])
 def get_open_positions():
     result = Queries().get_open_positions_data()
