@@ -8,6 +8,7 @@ class ResponseKeys():
     price: str
     apr: str
     slippage: str
+    value: str
 
 RESPONSE_KEYS = ResponseKeys(
     "timestamp",
@@ -15,5 +16,6 @@ RESPONSE_KEYS = ResponseKeys(
     "claimed_rewards",
     "price",
     "apr",
-    "slippage"
+    "slippage",
+    "value"
 )

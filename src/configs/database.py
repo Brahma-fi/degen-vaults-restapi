@@ -45,6 +45,7 @@ class MonitoredTokens():
 class TableNames():
     historic_rewards: str
     buffer_values: str
+    usdc_balances: str
     open_positions: str
     share_price_db: str 
     ethmaxi_share_price_db: str
@@ -55,6 +56,7 @@ DATABASE_NAME = 'protected_moonshots_activity'
 TABLE_NAMES = TableNames(
     'historic_rewards',
     'buffer_values',
+    'usdc_balances',
     'open_positions',
     'share_price_db',
     'ethmaxi_share_price_db',
