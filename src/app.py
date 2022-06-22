@@ -1,93 +1,34 @@
 from flask_cors import CORS
 from flask import Flask
 
-from .utils.on_chain import OnChainQueries
-from .configs.database import MONITORED_TOKENS, TABLE_NAMES, VAULTS
-from .configs.response import RESPONSE_KEYS
-from .utils.formatting import Formattor
-from .utils.queries import Queries
+from .controller.common import get_all_buffers, get_historic_rewards, get_latest_buffer, get_latest_usdc_balance, get_open_positions, get_tvl
+from .controller.pool import get_pool_apy, get_pool_health
+from .controller.vault import get_apr_values, get_share_prices, get_slippage
 
 app = Flask(__name__)
 CORS(app)
 
+# Health check
 @app.route("/", methods=['GET'])
 def health_check():
     return {'status':'OK'}
 
-@app.route("/historic_rewards", methods=['GET'])
-def get_historic_rewards():
-    result = Queries().get_all_timestamp_value_data(
-        TABLE_NAMES.historic_rewards, 
-        RESPONSE_KEYS.claimed_rewards
-    )
-    return  Formattor().formatted_response(200, result)
+# Common Stats Endpoints
+app.route("/historic_rewards", methods=['GET'])(get_historic_rewards)
+app.route("/latest_buffer", methods=['GET'])(get_latest_buffer)
+app.route("/latest_balance", methods=['GET'])(get_latest_usdc_balance)
+app.route("/all_buffers", methods=['GET'])(get_all_buffers)
+app.route("/open_timestamps", methods=['GET'])(get_open_positions)
+app.route("/tvl", methods=['GET'])(get_tvl)
 
-@app.route("/latest_buffer", methods=['GET'])
-def get_latest_buffer():
-    result = Queries().get_latest_timestamp_value_data(TABLE_NAMES.buffer_values, RESPONSE_KEYS.buffer)
-    return  Formattor().formatted_response(200, result)
+# Pool Endpoints
+app.route("/<pool_name>/health", methods=["GET"])(get_pool_health)
+app.route("/<pool_name>/apy", methods=["GET"])(get_pool_apy)
 
-@app.route("/latest_balance", methods=['GET'])
-def get_latest_usdc_balance():
-    result = Queries().get_latest_timestamp_value_data(TABLE_NAMES.usdc_balances, RESPONSE_KEYS.value)
-    return  Formattor().formatted_response(200, result)
-
-@app.route("/all_buffers", methods=['GET'])
-def get_all_buffers():
-    result = Queries().get_all_timestamp_value_data(TABLE_NAMES.buffer_values, RESPONSE_KEYS.buffer)
-    return  Formattor().formatted_response(200, result)
-
-@app.route("/open_timestamps", methods=['GET'])
-def get_open_positions():
-    result = Queries().get_open_positions_data()
-    return  Formattor().formatted_response(200, result)
-
-@app.route("/<vault_name>/share_price", methods=['GET'])
-def get_share_prices(vault_name):
-    if not(VAULTS.is_valid_vault(vault_name=vault_name)):
-        return Formattor().formatted_response(400,{
-            'error': f"{vault_name} :: is not a valid vault name"
-        })
-
-    result = Queries().get_all_timestamp_value_data(
-        TABLE_NAMES.share_price_db 
-        if vault_name == VAULTS.pmusdc.name else 
-        TABLE_NAMES.ethmaxi_share_price_db, 
-        RESPONSE_KEYS.price
-    )
-    return  Formattor().formatted_response(200, result)
-
-@app.route("/<vault_name>/apr", methods=['GET'])
-def get_apr_values(vault_name):
-    if not(VAULTS.is_valid_vault(vault_name=vault_name)):
-        return Formattor().formatted_response(400,{
-            'error': f"{vault_name} :: is not a valid vault name"
-        })
-
-    result = Queries().get_latest_timestamp_value_data(
-        TABLE_NAMES.share_price_db 
-        if vault_name == VAULTS.pmusdc.name else 
-        TABLE_NAMES.ethmaxi_share_price_db, 
-        RESPONSE_KEYS.apr
-    )
-    return  Formattor().formatted_response(200, result)
-
-@app.route("/<token_name>/slippage", methods=['GET'])
-def get_slippage(token_name):
-    if not(MONITORED_TOKENS.is_valid_token(token_name=token_name)):
-        return Formattor().formatted_response(400,{
-            'error': f"{token_name} :: is not a valid vault name"
-        })
-
-    result = Queries().get_withdraw_slippage(
-        MONITORED_TOKENS.frax if token_name == MONITORED_TOKENS.frax.name else MONITORED_TOKENS.steth
-    )
-    return  Formattor().formatted_response(200, result)
-
-@app.route("/tvl", methods=['GET'])
-def get_tvl():
-    result = OnChainQueries().get_tvl()
-    return Formattor().formatted_response(200, result)
+# Vault Endpoints
+app.route("/<vault_name>/share_price", methods=['GET'])(get_share_prices)
+app.route("/<vault_name>/apr", methods=['GET'])(get_apr_values)
+app.route("/<token_name>/slippage", methods=['GET'])(get_slippage)
 
 
 if __name__ == '__main__':
