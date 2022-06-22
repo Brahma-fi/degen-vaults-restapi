@@ -56,6 +56,17 @@ def get_pool_health(pool_name):
 
     return Formattor().formatted_response(200, result)
 
+@app.route("/<pool_name>/apy", methods=["GET"])
+def get_pool_apy(pool_name):
+    try:
+        result = Queries().get_pool_apy(pool_name)
+    except:
+       return Formattor().formatted_response(400,{
+            'error': f"{pool_name} :: is not a valid pool"
+        }) 
+
+    return Formattor().formatted_response(200, result)
+
 @app.route("/<vault_name>/share_price", methods=['GET'])
 def get_share_prices(vault_name):
     if not(VAULTS.is_valid_vault(vault_name=vault_name)):

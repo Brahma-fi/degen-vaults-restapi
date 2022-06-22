@@ -48,3 +48,13 @@ class Queries():
         result[RESPONSE_KEYS.health] = data[0][7]['stringValue']
 
         return result
+
+    def get_pool_apy(self, pool):
+        query = f'select * from {PMUSDC_DB}.{TABLE_NAMES.basepool_apy} where pool_name = \'{pool}\' order by timestamp desc limit 1'
+        response = InstantiatedDB.execute_statement(query,[],True)
+        data = response['records']
+
+        result = {}
+        result[RESPONSE_KEYS.health] = data[0][1]['doubleValue']
+
+        return result
