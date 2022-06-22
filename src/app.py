@@ -1,8 +1,10 @@
 from flask_cors import CORS
 from flask import Flask
 
+from configs.vaults import MONITORED_TOKENS, VAULTS
+
 from .utils.on_chain import OnChainQueries
-from .configs.database import MONITORED_TOKENS, TABLE_NAMES, VAULTS
+from .configs.database import TABLE_NAMES
 from .configs.response import RESPONSE_KEYS
 from .utils.formatting import Formattor
 from .utils.queries import Queries
