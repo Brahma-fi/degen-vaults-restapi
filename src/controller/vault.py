@@ -1,9 +1,9 @@
-from utils.queries import Queries
-from utils.formatting import Formattor
+from ..utils.queries import Queries
+from ..utils.formatting import Formattor
 
-from configs.vaults import MONITORED_TOKENS, VAULTS
-from configs.database import TABLE_NAMES
-from configs.response import RESPONSE_KEYS
+from ..configs.vaults import MONITORED_TOKENS, VAULTS
+from ..configs.database import TABLE_NAMES
+from ..configs.response import RESPONSE_KEYS
 
 def get_slippage(token_name):
     if not(MONITORED_TOKENS.is_valid_token(token_name=token_name)):

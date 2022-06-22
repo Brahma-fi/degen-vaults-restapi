@@ -1,10 +1,10 @@
 from utils.on_chain import OnChainQueries
-from utils.queries import Queries
-from utils.formatting import Formattor
+from ..utils.queries import Queries
+from ..utils.formatting import Formattor
 
-from configs.vaults import MONITORED_TOKENS, VAULTS
-from configs.database import TABLE_NAMES
-from configs.response import RESPONSE_KEYS
+from ..configs.vaults import MONITORED_TOKENS, VAULTS
+from ..configs.database import TABLE_NAMES
+from ..configs.response import RESPONSE_KEYS
 
 def get_tvl():
     result = OnChainQueries().get_tvl()

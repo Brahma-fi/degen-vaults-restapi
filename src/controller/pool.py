@@ -1,5 +1,5 @@
-from utils.queries import Queries
-from utils.formatting import Formattor
+from ..utils.queries import Queries
+from ..utils.formatting import Formattor
 
 def get_pool_health(pool_name):
     try:

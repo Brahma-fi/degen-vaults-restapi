@@ -1,8 +1,8 @@
-from configs.vaults import MonitoredTokenInfo
-from configs.response import RESPONSE_KEYS
-from configs.database import ACTIVITY_DB, PMUSDC_DB, TABLE_NAMES
-from utils.database import InstantiatedDB
-from utils.formatting import Formattor
+from ..configs.vaults import MonitoredTokenInfo
+from ..configs.response import RESPONSE_KEYS
+from ..configs.database import ACTIVITY_DB, PMUSDC_DB, TABLE_NAMES
+from ..utils.database import InstantiatedDB
+from ..utils.formatting import Formattor
 
 class Queries():
     def __query_all_data(self, table_name):

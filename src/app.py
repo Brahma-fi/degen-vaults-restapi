@@ -1,12 +1,9 @@
 from flask_cors import CORS
 from flask import Flask
 
-from configs.vaults import MONITORED_TOKENS, VAULTS
-from controller.common import get_all_buffers, get_historic_rewards, get_latest_buffer, get_latest_usdc_balance, get_open_positions, get_tvl
-from controller.pool import get_pool_apy, get_pool_health
-from controller.vault import get_apr_values, get_share_prices, get_slippage
-
-from utils.on_chain import OnChainQueries
+from .controller.common import get_all_buffers, get_historic_rewards, get_latest_buffer, get_latest_usdc_balance, get_open_positions, get_tvl
+from .controller.pool import get_pool_apy, get_pool_health
+from .controller.vault import get_apr_values, get_share_prices, get_slippage
 
 app = Flask(__name__)
 CORS(app)

@@ -2,7 +2,7 @@ import os
 import boto3
 from dotenv import load_dotenv
 
-from configs.database import ACTIVITY_DB, PMUSDC_DB
+from ..configs.database import ACTIVITY_DB, PMUSDC_DB
 
 class Database():
     def __init__(self):
