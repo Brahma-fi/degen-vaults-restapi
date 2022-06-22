@@ -1,47 +1,6 @@
 from dataclasses import dataclass,fields
 
 @dataclass
-class VaultInfo():
-    name: str
-    address: str
-    batcher: str
-    token: str
-    decimals: int
-
-@dataclass
-class MonitoredTokenInfo():
-    name: str
-    table: str
-
-@dataclass
-class Vaults():
-    ethmaxi: VaultInfo
-    pmusdc: VaultInfo
-
-    def is_valid_vault(self, vault_name) -> bool:
-        for field in fields(self.__class__):
-            if field.name == vault_name:
-                return True
-        return False
-
-    def get_vaults(self):
-        return [field.name for field in fields(self.__class__)]
-
-@dataclass
-class MonitoredTokens():
-    frax: str
-    steth: str
-
-    def is_valid_token(self, token_name) -> bool:
-        for field in fields(self.__class__):
-            if field.name == token_name:
-                return True
-        return False
-
-    def get_tokens(self):
-        return [field.name for field in fields(self.__class__)]
-
-@dataclass
 class TableNames():
     historic_rewards: str
     buffer_values: str
@@ -51,8 +10,12 @@ class TableNames():
     ethmaxi_share_price_db: str
     steth_monitor: str
     frax_monitor: str
+    stablecoin_health: str
+    basepool_apy: str
 
-DATABASE_NAME = 'protected_moonshots_activity'
+ACTIVITY_DB = 'protected_moonshots_activity'
+PMUSDC_DB = 'pmusdc'
+
 TABLE_NAMES = TableNames(
     'historic_rewards',
     'buffer_values',
@@ -61,32 +24,7 @@ TABLE_NAMES = TableNames(
     'share_price_db',
     'ethmaxi_share_price_db',
     'steth_monitor',
-    'frax_monitor'
-)
-
-VAULTS = Vaults(
-    VaultInfo(
-        'ethmaxi',
-        '0xAa0508FcD0352B206F558b2B817dcC1F0cc3F401',
-        '0x47c84A87A2a972769cc5DeDa28118617E3A48F8C',
-        '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
-        1e18
-    ), 
-    VaultInfo(
-        'pmusdc', 
-        '0x1C4ceb52ab54a35F9d03FcC156a7c57F965e081e',
-        '0x1b6BF7Ab4163f9a7C1D4eCB36299525048083B5e',
-        '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
-        1e6
-    )
-)
-MONITORED_TOKENS = MonitoredTokens(
-    MonitoredTokenInfo(
-        'frax',
-        TABLE_NAMES.frax_monitor
-    ),
-    MonitoredTokenInfo(
-        'steth',
-        TABLE_NAMES.steth_monitor
-    )
+    'frax_monitor',
+    'stablecoin_health_db',
+    'basepool_apy_db'
 )

@@ -1,11 +1,12 @@
+from configs.vaults import MonitoredTokenInfo
 from ..configs.response import RESPONSE_KEYS
-from ..configs.database import DATABASE_NAME, TABLE_NAMES, MonitoredTokenInfo
+from ..configs.database import ACTIVITY_DB, TABLE_NAMES
 from ..utils.database import InstantiatedDB
 from ..utils.formatting import Formattor
 
 class Queries():
     def __query_all_data(self, table_name):
-        query = f'''select * from {DATABASE_NAME}.{table_name};'''
+        query = f'''select * from {ACTIVITY_DB}.{table_name};'''
         response = InstantiatedDB.execute_statement(query, [])
         result = response['records']
 
@@ -29,7 +30,7 @@ class Queries():
         return out
 
     def get_withdraw_slippage(self, token: MonitoredTokenInfo):
-        query = f'''select slippage from {DATABASE_NAME}.{token.table}'''
+        query = f'''select slippage from {ACTIVITY_DB}.{token.table}'''
         response = InstantiatedDB.execute_statement(query, [])
         data = response['records']
 

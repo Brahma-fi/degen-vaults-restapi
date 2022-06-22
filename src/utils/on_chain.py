@@ -3,7 +3,9 @@ import os
 
 from web3 import Web3
 
-from ..configs.database import TABLE_NAMES, VAULTS, VaultInfo
+from configs.vaults import VAULTS, VaultInfo
+
+from ..configs.database import TABLE_NAMES
 from ..configs.response import RESPONSE_KEYS
 from ..utils.queries import Queries
 
