@@ -1,6 +1,6 @@
 from dataclasses import dataclass,fields
 
-from configs.database import TABLE_NAMES
+from ..configs.database import TABLE_NAMES
 
 @dataclass
 class VaultInfo():
