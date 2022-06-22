@@ -1,4 +1,4 @@
-from utils.on_chain import OnChainQueries
+from ..utils.on_chain import OnChainQueries
 from ..utils.queries import Queries
 from ..utils.formatting import Formattor
 
