@@ -55,6 +55,6 @@ class Queries():
         data = response['records']
 
         result = {}
-        result[RESPONSE_KEYS.health] = data[0][1]['doubleValue']
+        result[RESPONSE_KEYS.apy] = data[0][1]['doubleValue']
 
         return result

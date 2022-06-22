@@ -10,6 +10,7 @@ class ResponseKeys():
     slippage: str
     value: str
     health: str
+    apy: str
 
 RESPONSE_KEYS = ResponseKeys(
     "timestamp",
@@ -19,5 +20,6 @@ RESPONSE_KEYS = ResponseKeys(
     "apr",
     "slippage",
     "value",
-    "health"
+    "health",
+    "apy"
 )
