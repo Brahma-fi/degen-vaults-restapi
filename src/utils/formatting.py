@@ -1,5 +1,5 @@
 from flask import jsonify
-from ..configs.response import RESPONSE_KEYS
+from configs.response import RESPONSE_KEYS
 
 class Formattor():
     def __get_timestamp_value_result(self,timestamp, value, key_name):

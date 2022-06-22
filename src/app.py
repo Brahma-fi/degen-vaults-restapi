@@ -2,12 +2,13 @@ from flask_cors import CORS
 from flask import Flask
 
 from configs.vaults import MONITORED_TOKENS, VAULTS
+from utils.database import InstantiatedDB
 
-from .utils.on_chain import OnChainQueries
-from .configs.database import TABLE_NAMES
-from .configs.response import RESPONSE_KEYS
-from .utils.formatting import Formattor
-from .utils.queries import Queries
+from utils.on_chain import OnChainQueries
+from configs.database import TABLE_NAMES
+from configs.response import RESPONSE_KEYS
+from utils.formatting import Formattor
+from utils.queries import Queries
 
 app = Flask(__name__)
 CORS(app)
@@ -43,6 +44,17 @@ def get_all_buffers():
 def get_open_positions():
     result = Queries().get_open_positions_data()
     return  Formattor().formatted_response(200, result)
+
+@app.route("/<pool_name>/health", methods=["GET"])
+def get_pool_health(pool_name):
+    try:
+        result = Queries().get_pool_health(pool_name)
+    except:
+       return Formattor().formatted_response(400,{
+            'error': f"{pool_name} :: is not a valid pool"
+        }) 
+
+    return Formattor().formatted_response(200, result)
 
 @app.route("/<vault_name>/share_price", methods=['GET'])
 def get_share_prices(vault_name):

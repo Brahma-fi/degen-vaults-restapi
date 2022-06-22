@@ -1,8 +1,8 @@
 from configs.vaults import MonitoredTokenInfo
-from ..configs.response import RESPONSE_KEYS
-from ..configs.database import ACTIVITY_DB, TABLE_NAMES
-from ..utils.database import InstantiatedDB
-from ..utils.formatting import Formattor
+from configs.response import RESPONSE_KEYS
+from configs.database import ACTIVITY_DB, PMUSDC_DB, TABLE_NAMES
+from utils.database import InstantiatedDB
+from utils.formatting import Formattor
 
 class Queries():
     def __query_all_data(self, table_name):
@@ -36,5 +36,15 @@ class Queries():
 
         result = {}
         result[RESPONSE_KEYS.slippage] = data[-1][0]['doubleValue']
+
+        return result
+
+    def get_pool_health(self, pool):
+        query = f'select * from {PMUSDC_DB}.{TABLE_NAMES.stablecoin_health} where pool_name = \'{pool}\' order by timestamp desc limit 1'
+        response = InstantiatedDB.execute_statement(query,[],True)
+        data = response['records']
+
+        result = {}
+        result[RESPONSE_KEYS.health] = data[0][7]['stringValue']
 
         return result
