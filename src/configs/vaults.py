@@ -19,6 +19,7 @@ class MonitoredTokenInfo():
 class Vaults():
     ethmaxi: VaultInfo
     pmusdc: VaultInfo
+    pmusdc_clone: VaultInfo
 
     def is_valid_vault(self, vault_name) -> bool:
         for field in fields(self.__class__):
@@ -56,6 +57,13 @@ VAULTS = Vaults(
         'pmusdc', 
         '0x1C4ceb52ab54a35F9d03FcC156a7c57F965e081e',
         '0x1b6BF7Ab4163f9a7C1D4eCB36299525048083B5e',
+        '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+        1e6
+    ),
+    VaultInfo(
+        'pmusdc', 
+        '0x3c4Fe0db16c9b521480c43856ba3196A9fa50E08',
+        '0xa67feFA6657e9aa3e4ee6EF28531641dAFBB8cAf',
         '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
         1e6
     )
