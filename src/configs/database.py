@@ -3,6 +3,7 @@ from dataclasses import dataclass
 @dataclass
 class TableNames():
     historic_rewards: str
+    susd_rewards: str
     buffer_values: str
     usdc_balances: str
     open_positions: str
@@ -18,6 +19,7 @@ PMUSDC_DB = 'pmusdc'
 
 TABLE_NAMES = TableNames(
     'historic_rewards',
+    'susd_rewards',
     'buffer_values',
     'usdc_balances',
     'open_positions',
