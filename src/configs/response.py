@@ -11,6 +11,7 @@ class ResponseKeys():
     value: str
     health: str
     apy: str
+    name: str
 
 RESPONSE_KEYS = ResponseKeys(
     "timestamp",
@@ -21,5 +22,6 @@ RESPONSE_KEYS = ResponseKeys(
     "slippage",
     "value",
     "health",
-    "apy"
+    "apy",
+    "name"
 )

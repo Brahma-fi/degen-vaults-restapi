@@ -58,3 +58,16 @@ class Queries():
         result[RESPONSE_KEYS.apy] = data[0][1]['doubleValue']
 
         return result
+
+    def get_pool(self, pool_name):
+        query = f'select {TABLE_NAMES.basepool_apy}.pool_name, {TABLE_NAMES.basepool_apy}.apy, {TABLE_NAMES.stablecoin_health}.pool_health FROM {PMUSDC_DB}.{TABLE_NAMES.basepool_apy} INNER JOIN {PMUSDC_DB}.{TABLE_NAMES.stablecoin_health} ON {TABLE_NAMES.basepool_apy}.pool_name = {TABLE_NAMES.stablecoin_health}.pool_name  WHERE {TABLE_NAMES.basepool_apy}.pool_name = \'{pool_name}\' order by  {TABLE_NAMES.basepool_apy}.timestamp desc limit 1'
+        response = InstantiatedDB.execute_statement(query,[],True)
+        data = response['records']
+
+        result = {
+            RESPONSE_KEYS.name: data[0][0]['stringValue'],
+            RESPONSE_KEYS.apy: data[0][1]['doubleValue'],
+            RESPONSE_KEYS.health: data[0][2]['stringValue']
+        }
+
+        return result

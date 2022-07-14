@@ -2,8 +2,9 @@ from flask_cors import CORS
 from flask import Flask
 
 from .controller.common import get_all_buffers, get_historic_rewards, get_latest_buffer, get_latest_usdc_balance, get_open_positions, get_tvl
-from .controller.pool import get_pool_apy, get_pool_health
+from .controller.pool import get_pool_apy, get_pool_health, get_pools
 from .controller.vault import get_apr_values, get_share_prices, get_slippage
+
 
 app = Flask(__name__)
 CORS(app)
@@ -22,6 +23,7 @@ app.route("/open_timestamps", methods=['GET'])(get_open_positions)
 app.route("/tvl", methods=['GET'])(get_tvl)
 
 # Pool Endpoints
+app.route("/pools", methods=['GET'])(get_pools)
 app.route("/<pool_name>/health", methods=["GET"])(get_pool_health)
 app.route("/<pool_name>/apy", methods=["GET"])(get_pool_apy)
 
