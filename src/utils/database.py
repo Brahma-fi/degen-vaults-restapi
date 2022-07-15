@@ -33,6 +33,7 @@ class Database():
             resourceArn = resource_arn,
             database = database,
             sql = query,
+            includeResultMetadata = True,
             parameters = params) 
         return response
 
