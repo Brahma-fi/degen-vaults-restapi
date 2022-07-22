@@ -23,7 +23,7 @@ class Formattor():
             return {}
             
         timestamp = rows[-1][0]['stringValue']
-        value = rows[-1][-1]['doubleValue']
+        value = rows[-1][1]['doubleValue']
 
         return self.__get_timestamp_value_result(timestamp, value, key_name)
 

@@ -24,6 +24,21 @@ class Queries():
             key_name
         )
 
+    def get_latest_timestamp_data(self, table_name, key_name, type, index):
+        rows = self.__query_all_data(table_name)
+
+        if len(rows) == 0:
+            return {}
+            
+        timestamp = rows[-1][0]['stringValue']
+        value = rows[-1][index][type]
+
+        result = {}
+        result[RESPONSE_KEYS.timestamp] = timestamp
+        result[key_name] = value
+
+        return result
+
     def get_open_positions_data(self):
         out = [ row[0]['stringValue'] for row in self.__query_all_data(TABLE_NAMES.open_positions)]
 
