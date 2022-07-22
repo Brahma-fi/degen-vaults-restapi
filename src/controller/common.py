@@ -31,8 +31,13 @@ def get_latest_buffer():
     return  Formattor().formatted_response(200, result)
 
 def get_historic_rewards():
-    result = Queries().get_all_timestamp_value_data(
+    frax_output = Queries().get_latest_timestamp_value_data(
         TABLE_NAMES.historic_rewards, 
         RESPONSE_KEYS.claimed_rewards
     )
+    susd_output = Queries().get_latest_timestamp_value_data(
+        TABLE_NAMES.susd_rewards,
+        RESPONSE_KEYS.claimed_rewards
+    )
+    result = susd_output[RESPONSE_KEYS.claimed_rewards]+frax_output[RESPONSE_KEYS.claimed_rewards]
     return  Formattor().formatted_response(200, result)
