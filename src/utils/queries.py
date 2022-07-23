@@ -18,10 +18,11 @@ class Queries():
             key_name
         )
 
-    def get_latest_timestamp_value_data(self, table_name, key_name):
+    def get_latest_timestamp_value_data(self, table_name, key_name, index=-1):
         return Formattor().formatted_latest_timestamp_value_entry(
             self.__query_all_data(table_name), 
-            key_name
+            key_name,
+            index
         )
 
     def get_latest_timestamp_data(self, table_name, key_name, type, index):

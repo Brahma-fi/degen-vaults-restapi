@@ -18,12 +18,12 @@ class Formattor():
     def formatted_all_timestamp_value_entries(self, rows, key_name):
         return [self.__timestamp_key_row_formatter(row, key_name) for row in rows]
 
-    def formatted_latest_timestamp_value_entry(self, rows, key_name):
+    def formatted_latest_timestamp_value_entry(self, rows, key_name, index):
         if len(rows) == 0:
             return {}
             
         timestamp = rows[-1][0]['stringValue']
-        value = rows[-1][1]['doubleValue']
+        value = rows[-1][index]['doubleValue']
 
         return self.__get_timestamp_value_result(timestamp, value, key_name)
 

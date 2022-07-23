@@ -19,7 +19,7 @@ def get_all_buffers():
     return  Formattor().formatted_response(200, result)
 
 def get_latest_usdc_balance():
-    result = Queries().get_latest_timestamp_value_data(TABLE_NAMES.usdc_balances, RESPONSE_KEYS.value)
+    result = Queries().get_latest_timestamp_value_data(TABLE_NAMES.usdc_balances, RESPONSE_KEYS.value,1)
     return  Formattor().formatted_response(200, result)
 
 def get_latest_position():
