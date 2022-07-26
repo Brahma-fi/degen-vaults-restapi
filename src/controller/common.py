@@ -18,8 +18,21 @@ def get_all_buffers():
     result = Queries().get_all_timestamp_value_data(TABLE_NAMES.buffer_values, RESPONSE_KEYS.buffer)
     return  Formattor().formatted_response(200, result)
 
+def get_latest_balance(token_name: str):
+    if token_name == 'usdc':
+        return get_latest_usdc_balance()
+    elif token_name == 'eth':
+        return get_latest_eth_balance()
+    else:
+        return Formattor().formatted_response(400,{
+            'error': f"{token_name} :: is not a valid token"
+        }) 
 def get_latest_usdc_balance():
     result = Queries().get_latest_timestamp_value_data(TABLE_NAMES.usdc_balances, RESPONSE_KEYS.value,1)
+    return  Formattor().formatted_response(200, result)
+
+def get_latest_eth_balance():
+    result = Queries().get_latest_timestamp_value_data(TABLE_NAMES.eth_balances, RESPONSE_KEYS.value,1)
     return  Formattor().formatted_response(200, result)
 
 def get_latest_position():

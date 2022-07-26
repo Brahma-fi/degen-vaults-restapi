@@ -6,6 +6,7 @@ class TableNames():
     susd_rewards: str
     buffer_values: str
     usdc_balances: str
+    eth_balances: str
     open_positions: str
     share_price_db: str 
     ethmaxi_share_price_db: str
@@ -22,6 +23,7 @@ TABLE_NAMES = TableNames(
     'susd_rewards',
     'buffer_values',
     'usdc_balances',
+    'eth_balances',
     'open_positions',
     'share_price_db',
     'ethmaxi_share_price_db',
