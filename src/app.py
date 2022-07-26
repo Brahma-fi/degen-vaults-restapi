@@ -1,7 +1,7 @@
 from flask_cors import CORS
 from flask import Flask
 
-from .controller.common import get_all_buffers, get_historic_rewards, get_latest_balance, get_latest_buffer, get_latest_position, get_open_positions, get_tvl
+from .controller.common import get_all_buffers, get_historic_rewards, get_latest_balance, get_latest_buffer, get_latest_position, get_latest_usdc_balance, get_open_positions, get_tvl
 from .controller.pool import get_pool_apy, get_pool_health
 from .controller.vault import get_apr_values, get_share_prices, get_slippage
 
@@ -16,6 +16,8 @@ def health_check():
 # Common Stats Endpoints
 app.route("/historic_rewards", methods=['GET'])(get_historic_rewards)
 app.route("/latest_buffer", methods=['GET'])(get_latest_buffer)
+# TODO: REMOVE THIS ROUTE
+app.route("/latest_balance", methods=['GET'])(get_latest_usdc_balance)
 app.route("/<token_name>/latest_balance", methods=['GET'])(get_latest_balance)
 app.route("/all_buffers", methods=['GET'])(get_all_buffers)
 app.route("/open_timestamps", methods=['GET'])(get_open_positions)
