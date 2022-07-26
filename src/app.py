@@ -16,8 +16,6 @@ def health_check():
 # Common Stats Endpoints
 app.route("/historic_rewards", methods=['GET'])(get_historic_rewards)
 app.route("/latest_buffer", methods=['GET'])(get_latest_buffer)
-# TODO: REMOVE THIS ROUTE
-app.route("/latest_balance", methods=['GET'])(get_latest_usdc_balance)
 app.route("/<token_name>/latest_balance", methods=['GET'])(get_latest_balance)
 app.route("/all_buffers", methods=['GET'])(get_all_buffers)
 app.route("/open_timestamps", methods=['GET'])(get_open_positions)
