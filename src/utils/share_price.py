@@ -1,4 +1,4 @@
-from configs.response import RESPONSE_KEYS
+from ..configs.response import RESPONSE_KEYS
 from ..configs.database import TABLE_NAMES
 from ..utils.queries import Queries
 

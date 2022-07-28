@@ -1,7 +1,5 @@
 from dataclasses import dataclass
 
-from ..configs.vaults import VAULTS
-
 @dataclass
 class TableNames():
     historic_rewards: str
@@ -34,8 +32,3 @@ TABLE_NAMES = TableNames(
     'stablecoin_health_db',
     'basepool_apy_db'
 )
-
-SHARE_PRICE_TABLE_NAMES = {
-    f"{VAULTS.pmusdc}": TABLE_NAMES.share_price_db,
-    f"{VAULTS.ethmaxi}": TABLE_NAMES.ethmaxi_share_price_db
-}
