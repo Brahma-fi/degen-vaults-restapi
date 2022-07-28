@@ -7,10 +7,6 @@ from ..utils.queries import Queries
 from ..utils.on_chain import OnChainQueries
 from ..utils.share_price import SharePriceResult
 
-@dataclass
-class SharePriceController:
-    ethmaxi: SharePriceResult
-    pmusdc: SharePriceResult
 
 def get_latest_ethmaxi_share_price():
     latest_data = Queries().get_latest_timestamp_value_data(
@@ -47,7 +43,7 @@ PMUSDCSharePrice = SharePriceResult(
     lambda: get_latest_generic_share_price("usdc")
 )
 
-SharePriceControllerInstance = SharePriceController(
-    EthMaxiSharePrice,
-    PMUSDCSharePrice
-)
+SharePriceControllers = {
+    f"{VAULTS.ethmaxi}": EthMaxiSharePrice,
+    f"{VAULTS.pmusdc}": PMUSDCSharePrice
+}
