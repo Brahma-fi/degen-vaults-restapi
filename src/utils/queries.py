@@ -12,6 +12,13 @@ class Queries():
 
         return result
 
+    def __query_latest_data(self, table_name):
+        query = f'''select * from {ACTIVITY_DB}.{table_name} order by timestamp desc limit 1;'''
+        response = InstantiatedDB.execute_statement(query, [])
+        result = response['records']
+
+        return result
+
     def get_all_timestamp_value_data(self, table_name, key_name):
         return Formattor().formatted_all_timestamp_value_entries(
             self.__query_all_data(table_name), 
@@ -20,13 +27,13 @@ class Queries():
 
     def get_latest_timestamp_value_data(self, table_name, key_name, index=-1):
         return Formattor().formatted_latest_timestamp_value_entry(
-            self.__query_all_data(table_name), 
+            self.__query_latest_data(table_name), 
             key_name,
             index
         )
 
     def get_latest_timestamp_data(self, table_name, key_name, type, index):
-        rows = self.__query_all_data(table_name)
+        rows = self.__query_latest_data(table_name)
 
         if len(rows) == 0:
             return {}
