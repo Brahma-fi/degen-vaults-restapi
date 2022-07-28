@@ -27,7 +27,8 @@ def get_apr_values(vault_name):
         TABLE_NAMES.share_price_db 
         if vault_name == VAULTS.pmusdc.name else 
         TABLE_NAMES.ethmaxi_share_price_db, 
-        RESPONSE_KEYS.apr
+        RESPONSE_KEYS.apr,
+        -1
     )
     return  Formattor().formatted_response(200, result)
 
