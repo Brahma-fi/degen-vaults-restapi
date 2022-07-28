@@ -71,7 +71,7 @@ class OnChainQueries():
             ).call())
         )
 
-        return tokens_received/lp_token_amount/1e18
+        return tokens_received/lp_token_amount
 
 
     
