@@ -55,23 +55,22 @@ class OnChainQueries():
 
         return balances
     
-    def get_latest_token_price_from_curve_pool(self, pool_address, index_in_pool):
+    def get_latest_token_price_from_curve_pool(self, pool_address, index_in_pool, index_of_base):
         curve_pool = self.w3.eth.contract(
             address = pool_address,
             abi = self.curve_pool_abi
         ).functions
-        lp_token_amount = 1000*1e18
-
-        print("vp:",curve_pool.get_virtual_price().call())
+        lp_token_amount = 1e5
 
         tokens_received = (
-            float(curve_pool.calc_withdraw_one_coin(
-                int(lp_token_amount),
-                int(index_in_pool)
+            float(curve_pool.get_dy(
+                int(index_of_base),
+                int(index_in_pool),
+                int(lp_token_amount) 
             ).call())
         )
 
-        return tokens_received/lp_token_amount
+        return 1/(tokens_received/lp_token_amount)
 
 
     

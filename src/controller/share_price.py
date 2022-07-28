@@ -13,7 +13,7 @@ def get_latest_ethmaxi_share_price():
         TABLE_NAMES.ethmaxi_share_price_db, 
         RESPONSE_KEYS.price
     )
-    steth_price = OnChainQueries().get_latest_token_price_from_curve_pool(CURVE_POOL_ADDRESSES.steth,0)
+    steth_price = OnChainQueries().get_latest_token_price_from_curve_pool(CURVE_POOL_ADDRESSES.steth,1,0)
 
     eth_share_price = latest_data[RESPONSE_KEYS.price]
     steth_share_price = eth_share_price / steth_price
