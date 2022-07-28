@@ -16,7 +16,6 @@ def health_check():
 # Common Stats Endpoints
 app.route("/historic_rewards", methods=['GET'])(get_historic_rewards)
 app.route("/latest_buffer", methods=['GET'])(get_latest_buffer)
-app.route("/<token_name>/latest_balance", methods=['GET'])(get_latest_balance)
 app.route("/all_buffers", methods=['GET'])(get_all_buffers)
 app.route("/open_timestamps", methods=['GET'])(get_open_positions)
 app.route("/latest_position", methods=['GET'])(get_latest_position)
@@ -30,6 +29,8 @@ app.route("/<pool_name>/apy", methods=["GET"])(get_pool_apy)
 app.route("/<vault_name>/share_price", methods=['GET'])(get_share_prices)
 app.route("/<vault_name>/apr", methods=['GET'])(get_apr_values)
 app.route("/<token_name>/slippage", methods=['GET'])(get_slippage)
+app.route("/<token_name>/latest_balance", methods=['GET'])(get_latest_balance)
+app.route("/<vault_name>/latest_share_price")
 
 
 if __name__ == '__main__':
