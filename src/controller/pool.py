@@ -20,3 +20,16 @@ def get_pool_apy(pool_name):
         }) 
 
     return Formattor().formatted_response(200, result)
+
+
+def get_base_apy():
+    try:
+        frax_apy = Queries().get_pool_apy('frax_usdc')['apy']
+        susd_apy = Queries().get_pool_apy('susd')['apy']
+        result = (frax_apy*2+susd_apy*1)/3
+    except:
+       return Formattor().formatted_response(400,{
+            'error': f"Error in getting pool apy's of frax_usdc, susd"
+        }) 
+
+    return Formattor().formatted_response(200, result)

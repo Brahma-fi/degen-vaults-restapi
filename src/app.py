@@ -2,7 +2,7 @@ from flask_cors import CORS
 from flask import Flask
 
 from .controller.common import get_all_buffers, get_historic_rewards, get_latest_balance, get_latest_buffer, get_latest_position, get_open_positions, get_tvl
-from .controller.pool import get_pool_apy, get_pool_health
+from .controller.pool import get_pool_apy, get_pool_health, get_base_apy
 from .controller.vault import get_apr_values, get_latest_share_price, get_share_prices, get_slippage
 
 app = Flask(__name__)
@@ -14,6 +14,7 @@ def health_check():
     return {'status':'OK'}
 
 # Common Stats Endpoints
+app.route("/base_apy", methods=['GET'])(get_base_apy)
 app.route("/historic_rewards", methods=['GET'])(get_historic_rewards)
 app.route("/latest_buffer", methods=['GET'])(get_latest_buffer)
 app.route("/all_buffers", methods=['GET'])(get_all_buffers)
